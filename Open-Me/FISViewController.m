@@ -30,6 +30,8 @@
 @property (strong, nonatomic) IBOutlet UIView *inputFieldContainer;
 @property (strong, nonatomic) IBOutlet UIView *buttonsContainer;
 
+@property (strong, nonatomic) NSDictionary *calcElements;
+
 @end
 
 @implementation FISViewController
@@ -39,29 +41,39 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    NSDictionary *calcElements = @{@"0":self.zeroButton,
-                                   @"1":self.oneButton,
-                                   @"2":self.twoButton,
-                                   @"3":self.threeButton,
-                                   @"4":self.fourButton,
-                                   @"5":self.fiveButton,
-                                   @"6":self.sixButton,
-                                   @"7":self.sevenButton,
-                                   @"8":self.eightButton,
-                                   @"9":self.nineButton,
-                                   @"10":self.divideButton,
-                                   @"11":self.multiplyButton,
-                                   @"12":self.subtractionButton,
-                                   @"13":self.additionButton,
-                                   @"14":self.equalButton,
-                                   @"15":self.decimalButton,
-                                   @"16":self.inputField,
-                                   @"17":self.inputFieldContainer,
-                                   @"18":self.buttonsContainer
-                                   };
-                                   
+    self.calcElements = @{@"0":self.zeroButton,
+                          @"1":self.oneButton,
+                          @"2":self.twoButton,
+                          @"3":self.threeButton,
+                          @"4":self.fourButton,
+                          @"5":self.fiveButton,
+                          @"6":self.sixButton,
+                          @"7":self.sevenButton,
+                          @"8":self.eightButton,
+                          @"9":self.nineButton,
+                          @"10":self.divideButton,
+                          @"11":self.multiplyButton,
+                          @"12":self.subtractionButton,
+                          @"13":self.additionButton,
+                          @"14":self.equalButton,
+                          @"15":self.decimalButton,
+                          @"16":self.inputField,
+                          @"17":self.inputFieldContainer,
+                          @"18":self.buttonsContainer
+                          };
+    
+    for (UIView *viewElement in self.calcElements) {
+        [self stripConstraintsFrom:viewElement];
+    }
     
 }
+
+
+-(void)stripConstraintsFrom:(UIView*)viewElement {
+    [viewElement removeConstraints:viewElement.constraints];
+    viewElement.translatesAutoresizingMaskIntoConstraints = NO;
+}
+
 
 - (void)didReceiveMemoryWarning
 {
