@@ -27,6 +27,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *equalButton;
 @property (strong, nonatomic) IBOutlet UIButton *decimalButton;
 
+@property (weak, nonatomic) IBOutlet UITextField *inputField;
+
 @end
 
 @implementation FISViewController
