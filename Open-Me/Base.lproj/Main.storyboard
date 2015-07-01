@@ -182,6 +182,7 @@
                         <outlet property="fiveButton" destination="1Se-RN-pgZ" id="asi-5s-6Jq"/>
                         <outlet property="fourButton" destination="rTm-G3-deF" id="KQl-Ng-fEg"/>
                         <outlet property="inputField" destination="yV0-KJ-CTc" id="w2r-J2-J3u"/>
+                        <outlet property="inputFieldContainer" destination="Lvx-iX-YZJ" id="BOG-e3-RK3"/>
                         <outlet property="multiplyButton" destination="zES-c3-49V" id="7OX-xh-yFe"/>
                         <outlet property="nineButton" destination="Pa0-Mb-Q0M" id="EOI-PI-aLH"/>
                         <outlet property="oneButton" destination="mTU-Le-zPn" id="heG-ez-inx"/>
