@@ -41,39 +41,77 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    self.calcElements = @{@"0":self.zeroButton,
-                          @"1":self.oneButton,
-                          @"2":self.twoButton,
-                          @"3":self.threeButton,
-                          @"4":self.fourButton,
-                          @"5":self.fiveButton,
-                          @"6":self.sixButton,
-                          @"7":self.sevenButton,
-                          @"8":self.eightButton,
-                          @"9":self.nineButton,
-                          @"10":self.divideButton,
-                          @"11":self.multiplyButton,
-                          @"12":self.subtractionButton,
-                          @"13":self.additionButton,
-                          @"14":self.equalButton,
-                          @"15":self.decimalButton,
-                          @"16":self.inputField,
-                          @"17":self.inputFieldContainer,
-                          @"18":self.buttonsContainer
+    /**
+     Apple Docs: "Views"
+     A dictionary of views that appear in the visual format string. The keys must be the string values used in the visual format string, and the values must be the view objects.
+     */
+
+    self.calcElements = @{@"zeroButton":self.zeroButton,
+                          @"oneButton":self.oneButton,
+                          @"twoButton":self.twoButton,
+                          @"threeButton":self.threeButton,
+                          @"fourButton":self.fourButton,
+                          @"fiveButton":self.fiveButton,
+                          @"sixButton":self.sixButton,
+                          @"sevenButton":self.sevenButton,
+                          @"eightButton":self.eightButton,
+                          @"nineButton":self.nineButton,
+                          @"divideButton":self.divideButton,
+                          @"multiplyButton":self.multiplyButton,
+                          @"subtractionButton":self.subtractionButton,
+                          @"additionButton":self.additionButton,
+                          @"equalButton":self.equalButton,
+                          @"decimalButton":self.decimalButton,
+                          @"inputField":self.inputField,
+                          @"inputFieldContainer":self.inputFieldContainer,
+                          @"buttonsContainer":self.buttonsContainer
                           };
-    
     for (UIView *viewElement in self.calcElements) {
         [self stripConstraintsFrom:viewElement];
     }
+    [self.view removeConstraints:self.view.constraints];
+        
+    [self addContainerConstraints];
+    [self addInputFieldConstraints];
+        /**
+    Metrics    A dictionary of constants that appear in the visual format string. The dictionary’s keys must be the string values used in the  visual format string. Their values must be NSNumber objects.
+         */
     
 }
 
 
 -(void)stripConstraintsFrom:(UIView*)viewElement {
     [viewElement removeConstraints:viewElement.constraints];
-    viewElement.translatesAutoresizingMaskIntoConstraints = NO;
+    [viewElement setTranslatesAutoresizingMaskIntoConstraints:NO];
 }
 
+-(void)addContainerConstraints {
+    NSArray *hInputFieldContainerConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[inputFieldContainer]|" options:0 metrics:nil views:self.calcElements];
+    [self.view addConstraints:hInputFieldContainerConstraints];
+    
+    NSArray *hButtonsContainerConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[buttonsContainer]|" options:0 metrics:nil views:self.calcElements];
+    [self.view addConstraints:hButtonsContainerConstraints];
+    
+    NSArray *vContainerConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[inputFieldContainer][buttonsContainer](==inputFieldContainer)|" options:0 metrics:nil views:self.calcElements];
+    [self.view addConstraints:vContainerConstraints];
+    
+    
+}
+
+-(void)addInputFieldConstraints {
+    NSArray *hInputFieldConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[inputField]-|" options:0 metrics:nil views:self.calcElements];
+    [self.inputFieldContainer addConstraints:hInputFieldConstraints];
+    
+    NSArray *vInputFieldConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[topField]-30-[inputField]" options:0 metrics:nil views:self.calcElements];
+    [self.inputFieldContainer addConstraints:vInputFieldConstraints];
+}
+
+    /// Add 4 row constraints, and 4 column constraints. Or make a row and column constraint, for all 4 rows...
+-(void) addRowConstraints {
+    NSString *hGenericRowConstraints = [NSString stringWithFormat:@"H:|[%@][%@][%@][%@]|", farLeft, midLeft, midRight, farRight];
+    NSString *hGenericColConstraints = [NSString stringWithFormat:@"H:|[%@][%@][%@][%@]|", farTop, midTop, midBottom, farBottom];
+    
+}
 
 - (void)didReceiveMemoryWarning
 {
