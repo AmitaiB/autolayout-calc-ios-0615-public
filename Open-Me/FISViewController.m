@@ -107,11 +107,44 @@
 }
 
     /// Add 4 row constraints, and 4 column constraints. Or make a row and column constraint, for all 4 rows...
--(void) addRowConstraints {
-    NSString *hGenericRowConstraints = [NSString stringWithFormat:@"H:|[%@][%@][%@][%@]|", farLeft, midLeft, midRight, farRight];
-    NSString *hGenericColConstraints = [NSString stringWithFormat:@"H:|[%@][%@][%@][%@]|", farTop, midTop, midBottom, farBottom];
+-(void) addButtonsConstraints {
+    NSArray *allButtonsByRow = @[
+                                 @[@"oneButton", @"twoButton", @"threeButton", @"divideButton"],
+                                 @[@"fourButton", @"fiveButton", @"sixButton", @"multiplyButton"],
+                                 @[@"sevenButton", @"eightButton", @"nineButton", @"subtractionButton"],
+                                 @[@"zeroButton", @"decimalButton", @"equalButton", @"additionButton"]
+                                 ];
     
+    NSArray *allButtonsByCol = @[
+                                 @[@"oneButton", @"fourButton", @"sevenButton", @"zeroButton"], 
+                                 @[@"twoButton", @"fiveButton", @"eightButton", @"decimalButton"],
+                                 @[@"threeButton", @"sixButton", @"nineButton", @"equalButton"],
+                                 @[@"divideButton", @"multiplyButton", @"subtractionButton", @"additionButton"]
+                                 ];
+        ///This string is in Visual Format Language (see helper functions below).                        
+    for (NSArray *buttonRow in allButtonsByRow) {
+        NSString *currentRowConstraintString = [self genericRowConstraints:buttonRow];
+        NSArray *buttonRowConstraint = [NSLayoutConstraint constraintsWithVisualFormat:currentRowConstraintString options:0 metrics:nil views:self.calcElements];
+        [self.buttonsContainer addConstraints:buttonRowConstraint];
+    }
+
+    for (NSArray *buttonCol in allButtonsByCol) {
+        NSString *currentColConstraintString = [self genericColConstraints:buttonCol];
+        NSArray *buttonColConstraint = [NSLayoutConstraint constraintsWithVisualFormat:currentColConstraintString options:0 metrics:nil views:self.calcElements];
+        [self.buttonsContainer addConstraints:buttonColConstraint];
+    }
 }
+    
+-(NSString*) genericRowConstraints:(NSArray*)row {
+    NSString *hGenericRowConstraints = [NSString stringWithFormat:@"H:|[%@][%@](==%@)[%@](==%@)[%@](==%@)|", row[0], row[1], row[0], row[2], row[0], row[3], row[0]];
+    return hGenericRowConstraints;
+}
+
+-(NSString*) genericColConstraints:(NSArray*)col {
+    NSString *vGenericColConstraints = [NSString stringWithFormat:@"V:|[%@][%@](==%@)[%@](==%@)[%@](==%@)|", col[0], col[1], col[0], col[2], col[0], col[3], col[0]];
+    return vGenericColConstraints;
+}
+
 
 - (void)didReceiveMemoryWarning
 {
