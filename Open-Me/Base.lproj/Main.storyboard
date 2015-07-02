@@ -13,11 +13,11 @@
                         <viewControllerLayoutGuide type="top" id="lHh-Dm-drs"/>
                         <viewControllerLayoutGuide type="bottom" id="jmo-tK-uKU"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="EiG-5C-bgp">
+                    <view key="view" contentMode="scaleToFill" id="EiG-5C-bgp" userLabel="superView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LK9-BF-aRw">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LK9-BF-aRw" userLabel="buttonsView">
                                 <rect key="frame" x="0.0" y="284" width="320" height="284"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mTU-Le-zPn">
@@ -154,7 +154,7 @@
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lvx-iX-YZJ">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lvx-iX-YZJ" userLabel="upperView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="284"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter calculations here" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yV0-KJ-CTc">

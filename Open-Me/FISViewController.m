@@ -37,7 +37,7 @@
 @implementation FISViewController
 
 - (void)viewDidLoad
-{
+{                                                                           NSLog(@"line 40");
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
@@ -45,7 +45,7 @@
      Apple Docs: "Views"
      A dictionary of views that appear in the visual format string. The keys must be the string values used in the visual format string, and the values must be the view objects.
      */
-
+NSLog(@"line 48");
     self.calcElements = @{@"zeroButton":self.zeroButton,
                           @"oneButton":self.oneButton,
                           @"twoButton":self.twoButton,
@@ -64,15 +64,20 @@
                           @"decimalButton":self.decimalButton,
                           @"inputField":self.inputField,
                           @"inputFieldContainer":self.inputFieldContainer,
-                          @"buttonsContainer":self.buttonsContainer
-                          };
-    for (UIView *viewElement in self.calcElements) {
+                          @"buttonsContainer":self.buttonsContainer,
+                          @"superview": self.view
+                          }; NSLog(@"line 68");
+    for (UIView *viewElement in self.calcElements.allValues) {
         [self stripConstraintsFrom:viewElement];
     }
     [self.view removeConstraints:self.view.constraints];
-        
+NSLog(@"line 73");
     [self addContainerConstraints];
+NSLog(@"line 75");
     [self addInputFieldConstraints];
+NSLog(@"line 77");
+    [self addButtonsConstraints];
+NSLog(@"line 79");
         /**
     Metrics    A dictionary of constants that appear in the visual format string. The dictionary’s keys must be the string values used in the  visual format string. Their values must be NSNumber objects.
          */
@@ -92,19 +97,23 @@
     NSArray *hButtonsContainerConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|[buttonsContainer]|" options:0 metrics:nil views:self.calcElements];
     [self.view addConstraints:hButtonsContainerConstraints];
     
-    NSArray *vContainerConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[inputFieldContainer][buttonsContainer](==inputFieldContainer)|" options:0 metrics:nil views:self.calcElements];
+    NSArray *vContainerConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[inputFieldContainer][buttonsContainer(==inputFieldContainer)]|" options:0 metrics:nil views:self.calcElements];
     [self.view addConstraints:vContainerConstraints];
     
     
 }
 
+#pragma mark - addInputFieldConstraints
+
 -(void)addInputFieldConstraints {
     NSArray *hInputFieldConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[inputField]-|" options:0 metrics:nil views:self.calcElements];
-    [self.inputFieldContainer addConstraints:hInputFieldConstraints];
+    [self.view addConstraints:hInputFieldConstraints];
     
-    NSArray *vInputFieldConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[topField]-30-[inputField]" options:0 metrics:nil views:self.calcElements];
-    [self.inputFieldContainer addConstraints:vInputFieldConstraints];
+    NSArray *vInputFieldConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[superview]-30-[inputField]" options:0 metrics:nil views:self.calcElements];
+    [self.view addConstraints:vInputFieldConstraints];
 }
+
+#pragma mark = addButtonsConstraints
 
     /// Add 4 row constraints, and 4 column constraints. Or make a row and column constraint, for all 4 rows...
 -(void) addButtonsConstraints {
@@ -136,12 +145,12 @@
 }
     
 -(NSString*) genericRowConstraints:(NSArray*)row {
-    NSString *hGenericRowConstraints = [NSString stringWithFormat:@"H:|[%@][%@](==%@)[%@](==%@)[%@](==%@)|", row[0], row[1], row[0], row[2], row[0], row[3], row[0]];
+    NSString *hGenericRowConstraints = [NSString stringWithFormat:@"H:|[%@][%@(==%@)][%@(==%@)][%@(==%@)]|", row[0], row[1], row[0], row[2], row[0], row[3], row[0]];
     return hGenericRowConstraints;
 }
 
 -(NSString*) genericColConstraints:(NSArray*)col {
-    NSString *vGenericColConstraints = [NSString stringWithFormat:@"V:|[%@][%@](==%@)[%@](==%@)[%@](==%@)|", col[0], col[1], col[0], col[2], col[0], col[3], col[0]];
+    NSString *vGenericColConstraints = [NSString stringWithFormat:@"V:|[%@][%@(==%@)][%@(==%@)][%@(==%@)]|", col[0], col[1], col[0], col[2], col[0], col[3], col[0]];
     return vGenericColConstraints;
 }
 
