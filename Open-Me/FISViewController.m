@@ -65,7 +65,7 @@ NSLog(@"line 48");
                           @"inputField":self.inputField,
                           @"inputFieldContainer":self.inputFieldContainer,
                           @"buttonsContainer":self.buttonsContainer,
-                          @"superview": self.view
+//                          @"superview": self.view
                           }; NSLog(@"line 68");
     for (UIView *viewElement in self.calcElements.allValues) {
         [self stripConstraintsFrom:viewElement];
@@ -106,10 +106,10 @@ NSLog(@"line 79");
 #pragma mark - addInputFieldConstraints
 
 -(void)addInputFieldConstraints {
-    NSArray *hInputFieldConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[inputField]-|" options:0 metrics:nil views:self.calcElements];
+    NSArray *hInputFieldConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-20-[inputField]-20-|" options:0 metrics:nil views:self.calcElements];
     [self.view addConstraints:hInputFieldConstraints];
     
-    NSArray *vInputFieldConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:[superview]-30-[inputField]" options:0 metrics:nil views:self.calcElements];
+    NSArray *vInputFieldConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-30-[inputField]" options:0 metrics:nil views:self.calcElements];
     [self.view addConstraints:vInputFieldConstraints];
 }
 
